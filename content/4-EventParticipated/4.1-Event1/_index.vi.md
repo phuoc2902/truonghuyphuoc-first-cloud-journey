@@ -38,4 +38,5 @@ pre: " <b> 4.1. </b> "
 - Áp dụng các hướng dẫn trong checklist DevOps để ngăn ngừa các lỗi triển khai trong các workshop/dự án cá nhân.
 
 ### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
+![First Cloud Journey Meetup](/images/4-EventParticipated/event1.jpg)
+

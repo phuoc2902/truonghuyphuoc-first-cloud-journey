@@ -34,4 +34,5 @@ pre: " <b> 4.2. </b> "
 - **Focus on Fundamentals:** Study core school subjects thoroughly, as they are the unchanging foundation regardless of how cloud providers and technologies evolve.
 
 ### Some event photos
-*Add your event photos here*
+![AWS: Enterprise Cloud Architectures and Industry Application](/images/4-EventParticipated/event2.jpg)
+

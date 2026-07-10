@@ -34,4 +34,5 @@ pre: " <b> 4.2. </b> "
 - **Tập trung vào Fundamentals:** Học chắc các môn cơ bản tại trường, vì đó là nền tảng cốt lõi không thay đổi dù công nghệ (cloud providers) có thay đổi.
 
 ### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
+![AWS: Enterprise Cloud Architectures and Industry Application](/images/4-EventParticipated/event2.jpg)
+

@@ -38,4 +38,5 @@ pre: " <b> 4.1. </b> "
 - Incorporate DevOps checklist guidelines to prevent deployment mistakes in personal workshops/projects.
 
 ### Some event photos
-*Add your event photos here*
+![First Cloud Journey Meetup](/images/4-EventParticipated/event1.jpg)
+
