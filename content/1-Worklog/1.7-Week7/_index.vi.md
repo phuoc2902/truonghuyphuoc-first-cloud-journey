@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 7"
+﻿---
+title: "Tuần 7 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 7:
 
+* Cài đặt, cấu hình và khởi tạo hạ tầng hàng đợi tin nhắn Message Queue (RabbitMQ/Kafka).
 
-### Mục tiêu tuần 7:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | So sánh RabbitMQ và Kafka, chọn RabbitMQ vì phù hợp tiêu chuẩn AMQP và có cơ chế định tuyến linh hoạt. | 27/05/2026 | 27/05/2026 |  |
+| 3 | Viết mã nguồn Docker Compose khởi chạy container RabbitMQ tích hợp giao diện quản trị trực quan. | 28/05/2026 | 28/05/2026 | <https://www.docker.com/> |
+| 4 | Định cấu hình Connection Factory, các loại Exchange, Queue và Binding Key trong file cấu hình Spring Boot. | 29/05/2026 | 29/05/2026 | <https://spring.io/projects/spring-amqp> |
+| 5 | Cấu hình thư viện Jackson Message Converter để tự động mã hóa dữ liệu DTO sang định dạng JSON gửi đi. | 01/06/2026 | 01/06/2026 |  |
+| 6 | Xác thực cấu hình hàng đợi và mối kết kết nối bằng cách theo dõi trang quản trị HTTP Console của RabbitMQ. | 02/06/2026 | 02/06/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 7:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 7:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Dựng thành công dịch vụ RabbitMQ chạy ổn định bằng Docker phục vụ kết nối hàng đợi tin nhắn.
+* Cấu hình thành công Spring Boot AMQP cho phép định tuyến tin nhắn linh hoạt qua các Exchange.
+* Quy chuẩn hóa cấu hình chuyển đổi dữ liệu JSON tự động giúp việc truyền tải tin nhắn ổn định.

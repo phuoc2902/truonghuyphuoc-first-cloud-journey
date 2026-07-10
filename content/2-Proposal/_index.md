@@ -1,115 +1,147 @@
 ---
-title: "Proposal"
-date: 2024-01-01
+title: "Project Proposal: NovaTech E-Commerce Laptop Shop & AI Chatbot MVP"
+linkTitle: "Proposal"
+date: 2026-07-06
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+## Hybrid Cloud Integration (AWS Hybrid Integration) & Generative AI Solution
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+---
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+
+The **NovaTech** project is a comprehensive electronic commerce platform specializing in laptop sales (Laptop E-Commerce Shop). To optimize initial infrastructure costs during the Minimum Viable Product (MVP) phase while maintaining high security, strict data availability, and intelligent user interaction, we propose a **Hybrid Cloud** architecture combining **Amazon Web Services (AWS)** and **DigitalOcean VPS**.
+
+The core technical highlight is the integration of an **AI Chatbot** powered by **Amazon Bedrock**, which allows customers to automatically query specifications, compare laptops, and receive 24/7 shopping assistance based on a Retrieval-Augmented Generation (RAG) knowledge base securely stored in AWS S3.
+
+---
 
 ### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+#### Challenges of current E-commerce systems:
+- **Customer Support**: Providing 24/7 customer service requires a large support team, leading to high operational costs and inconsistent product advice.
+- **Security & Data Integrity**: Databases containing user info, orders, and payment records are vulnerable if hosted directly on public web servers.
+- **Infrastructure Cost**: Renting high-performance servers on major cloud providers during the MVP stage can be financially inefficient when traffic fluctuates.
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+#### NovaTech Proposed Solutions:
+1. **Cost-Optimized Hybrid Architecture**: Use a **DigitalOcean VPS** (low fixed cost) to host the Web Server / Backend API, while deploying the critical **PostgreSQL** database inside an **AWS RDS (Multi-AZ)** Private Subnet, protecting it from the public internet.
+2. **Encrypted VPN Connection**: Connect the two environments securely via an **AWS Site-to-Site VPN** tunnel.
+3. **AI Chatbot Virtual Assistant**: Utilize **Amazon Bedrock** alongside **RAG (Retrieval-Augmented Generation)** to access FAQ/Context documents stored in **Amazon S3**, helping users find the right laptop model quickly.
+4. **Edge Delivery**: Deploy the Next.js frontend to **Amazon S3** and distribute it globally via **Amazon CloudFront** combined with **AWS WAF** to increase page loading speed and defend against DDoS/SQL Injection attacks.
+
+---
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+Below is the detailed architecture diagram for the **NovaTech** E-Commerce platform:
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+![NovaTech AWS Hybrid MVP Architecture](/images/2-Proposal/novatech_aws_do_mvp_with_ai_chatbot.drawio.png)
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+#### Core Components:
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+##### A. Edge Front Door (Outside VPC)
+- **Amazon Route 53**: Handles DNS resolution.
+- **AWS WAF (Web Application Firewall)**: Filters malicious payloads and protects the API against OWASP Top 10 exploits.
+- **Amazon CloudFront**: CDN for delivering the static web interface (Next.js SPA) and routing API requests.
+- **Amazon S3 (Private SPA origin)**: Securely hosts the compiled frontend code.
+- **AWS Certificate Manager (ACM)**: Manages and issues SSL/TLS certificates automatically.
+
+##### B. Web Application Server (DigitalOcean VPS)
+- **Nginx Reverse Proxy**: Receives traffic from CloudFront and routes it to the backend application.
+- **Spring Boot API (Java)**: Handles main business logic and validates Cognito JWT tokens.
+- **Redis App Cache**: Caches product catalogs to reduce query latency and DB load.
+
+##### C. Private Database Network (AWS Cloud VPC)
+- **AWS Site-to-Site VPN**: Establishes an encrypted IPSec VPN tunnel between the Customer Gateway (DigitalOcean) and the Virtual Private Gateway (AWS).
+- **Amazon RDS PostgreSQL (Multi-AZ)**: Hosted entirely inside a Private Subnet. The Primary instance in AZ A processes read/write operations, while the Standby instance in AZ B synchronizes data to guarantee automatic failover (High Availability).
+
+##### D. AI Chatbot & Auxiliary Services (Regional AWS Services)
+- **Amazon Cognito**: Handles user registration, sign-ins, and federated Google login.
+- **Amazon Bedrock**: Runs Large Language Models (LLM) to process customer conversations.
+- **Amazon S3 (RAG Context)**: Stores product specifications and FAQ guides to provide accurate context for Bedrock AI.
+- **AWS Secrets Manager**: Secures database credentials and payment gateway API keys.
+
+##### E. Security, Observability & External Services
+- **Amazon CloudWatch**: Collects system logs and resource metrics.
+- **AWS CloudTrail**: Records AWS API calls for security auditing.
+- **Amazon SES (Simple Email Service)**: Sends account verification and order receipt emails.
+- **CI/CD Pipeline**: Automates build, test, and deployment steps from GitHub/GitLab to the DO VPS via SSH.
+- **PayOS Payment Gateway**: Integrates a Vietnamese payment gateway for processing order transactions.
+
+---
 
 ### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+#### Implementation Phases:
+1. **Design & Initialization (Week 1)**:
+   - Design detailed ERD database schemas for the Laptop Shop.
+   - Provision AWS VPC, Private Subnets, and configure AWS Site-to-Site VPN to DigitalOcean.
+2. **Network Setup & Security (Week 2)**:
+   - Configure Site-to-Site VPN between the two environments.
+   - Set up Route 53, WAF configuration, and integrate Amazon Cognito User Pool authentication.
+3. **Backend Development & RDS Configuration (Weeks 3 - 5)**:
+   - Write Spring Boot APIs for product management, shopping carts, orders, and checkout.
+   - Configure Amazon RDS PostgreSQL Multi-AZ and link credentials with AWS Secrets Manager.
+   - Secure endpoints using Cognito User Pool and Spring Security.
+4. **Frontend Development & Chatbot Integration (Weeks 6 - 8)**:
+   - Build Next.js interfaces for users and the admin dashboard.
+   - Integrate Chatbot UI on the web frontend, calling Amazon Bedrock via AWS SDK for RAG chat.
+   - Integrate PayOS payment gateway.
+5. **Testing, CI/CD & Deployment (Week 9)**:
+   - Set up automated pipelines via GitLab CI/CD.
+   - Deploy Frontend to S3/CloudFront and configure Route 53 and WAF.
+   - Conduct network latency tests over VPN and evaluate chatbot accuracy.
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+---
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+### 5. Roadmap & Key Milestones
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+| Timeline | Milestone | Deliverable |
+| --- | --- | --- |
+| **Week 1** | Research & Architecture Design | Hybrid Cloud architecture diagram & Database ERD schema. |
+| **Week 2** | Network Setup & Security | Operational VPN connection, Route 53, and Cognito setup. |
+| **Weeks 3 - 5** | Backend API & Database | Functional Spring Boot backend connected to RDS, PayOS integration. |
+| **Weeks 6 - 8** | Frontend & AI Chatbot Integration | Polished Next.js frontend, AI Chatbot responding to product queries. |
+| **Week 9** | Testing, CI/CD & Delivery | Production environment launched, final project handover. |
 
-Total: $0.7/month, $8.40/12 months
+---
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+### 6. Budget Estimation (Expected Monthly Cost)
 
-### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+Here is a monthly cost breakdown for the MVP phase:
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+| Service | Provider | Role | Estimated Cost / Month |
+| --- | --- | --- | --- |
+| **Amazon RDS PostgreSQL** | AWS | Primary Database (db.t4g.micro Multi-AZ) | ~ $30.00 |
+| **Amazon Cognito** | AWS | User Authentication (Free for first 50,000 MAUs) | $0.00 |
+| **Amazon Bedrock** | AWS | AI Chatbot Processing (Claude 3 Haiku LLM) | ~ $5.00 (Pay-per-use token billing) |
+| **Amazon CloudFront & S3** | AWS | Static Frontend hosting & RAG storage | ~ $2.00 |
+| **AWS Site-to-Site VPN** | AWS | Encrypted connection | ~ $36.00 ($0.05/hour per tunnel) |
+| **DigitalOcean VPS** | DigitalOcean | Backend host & Redis Cache | $12.00 (2 vCPUs, 2GB RAM, 60GB SSD) |
+| **Amazon SES & WAF** | AWS | Email notifications & Edge security | ~ $5.00 |
+| **Total** | | **MVP Hybrid Infrastructure Cost** | **~ $90.00 / Month** |
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+---
+
+### 7. Risk Assessment & Mitigation
+
+- **Risk 1: VPN Disconnection between VPS and RDS**
+  - *Impact*: Backend unable to reach PostgreSQL database, stopping services.
+  - *Mitigation*: Establish dual IPSec VPN tunnels on AWS and configure automatic failover routing at the Customer Gateway.
+- **Risk 2: Spikes in Amazon Bedrock API costs**
+  - *Impact*: Malicious chatbot spam leading to high AWS bills.
+  - *Mitigation*: Implement rate limiting on API Gateway / WAF and set maximum chat message quotas per user session.
+- **Risk 3: Latency over the VPN tunnel**
+  - *Impact*: Slow page response times for product queries.
+  - *Mitigation*: Utilize a local Redis cache on the DigitalOcean VPS to cache static product listings, querying RDS only for writes (e.g., checkout).
+
+---
 
 ### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+
+- **Real-World Application**: A fully functional, production-ready hybrid cloud e-commerce site.
+- **Smart Experience**: Enhanced user experience via an AI-assisted virtual chatbot capable of product consulting.
+- **Enterprise-Grade Security**: Customer data is secured inside private subnet layers, minimizing data leakage risks.

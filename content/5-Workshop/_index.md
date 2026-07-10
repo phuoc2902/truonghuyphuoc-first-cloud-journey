@@ -1,31 +1,33 @@
 ---
-title: "Workshop"
-date: 2024-01-01
+title: "5. Deploying NovaTech E-Commerce MVP & AI Chatbot on AWS"
+linkTitle: "Workshop"
+date: 2026-07-06
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
-# Secure Hybrid Access to S3 using VPC Endpoints
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+This section serves as a **Project Presentation Report**, guiding you through the deployment and analysis of the cloud infrastructure for the **NovaTech E-Commerce** project. The core highlight of the project is the integration of an **AI Chatbot Assistant** leveraging a Hybrid Cloud architecture (combining the power of AWS and a DigitalOcean application server).
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+Rather than providing simple "click-by-click" instructions, this documentation dives deep into the **Business Case** and the **"Why"** behind every architectural decision. It also provides actual source code as **Implementation Proof**.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+#### Target Audience
+- Individuals looking to use this project for a graduation thesis, a defense presentation, or a job portfolio.
+- Software engineers wanting to understand System Design thinking and how to solve real-world business problems.
 
-#### Content
+#### Prerequisites
+- **AWS Account:** Active (Free Tier recommended to avoid costs).
+- **Basic Knowledge:** Familiarity with Linux (Ubuntu), SSH connections, Java (Spring Boot), and React (Next.js).
+- **Tools:** A database management tool installed (e.g., DBeaver, pgAdmin, DataGrip).
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+#### Implementation & System Analysis
+
+1. [Architecture & Business Case](5.1-Architecture-Overview/)
+2. [Amazon RDS PostgreSQL (Data Integrity)](5.2-RDS-Database/)
+3. [Amazon S3 Image Storage (Web Performance)](5.3-S3-Storage/)
+4. [Amazon Cognito Authentication (Identity Security)](5.4-Cognito-Auth/)
+5. [Amazon Bedrock AI Chatbot (Project Highlight)](5.5-Bedrock-AI/)
+6. [DigitalOcean & PayOS (Completing the Flow)](5.6-Non-AWS-Services/)
+7. [Resource Cleanup (Cost Optimization)](5.7-Cleanup/)

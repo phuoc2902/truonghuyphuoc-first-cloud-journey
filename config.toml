@@ -14,9 +14,9 @@ home = [ "HTML", "RSS", "JSON"]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "workshop"
   # Git hub repo link
-  editURL = ""
+  editURL = "https://github.com/phuoc2902/truonghuyphuoc-first-cloud-journey/edit/main/content/"
   description = ""
-  author = "thienlh@thienlu.com"
+  author = "truonghuyphuoc789@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false

@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 9"
+﻿---
+title: "Tuần 9 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 9:
 
+* Xây dựng bộ Consumer lắng nghe hàng đợi để xử lý gửi Email và Thông báo hệ thống.
 
-### Mục tiêu tuần 9:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | Cấu hình thư viện JavaMailSender kết nối máy chủ gửi thư SMTP (như Gmail hoặc AWS SES). | 10/06/2026 | 10/06/2026 | <https://spring.io/guides/gs/sending-email/> |
+| 3 | Viết class `EmailEventConsumer` sử dụng decorator `@RabbitListener` lắng nghe queue để lấy dữ liệu gửi mail. | 11/06/2026 | 11/06/2026 | <https://spring.io/projects/spring-amqp> |
+| 4 | Thiết kế các mẫu email HTML chuyên nghiệp phản hồi tốt trên điện thoại bằng Thymeleaf. | 12/06/2026 | 12/06/2026 | <https://www.thymeleaf.org/> |
+| 5 | Xây dựng `NotificationEventConsumer` lưu vết thông báo thông báo hệ thống vào database. | 15/06/2026 | 15/06/2026 |  |
+| 6 | Kiểm thử đầu cuối hệ thống: Đặt hàng từ Next.js -> Đẩy MQ -> Consumer nhận tin -> Nhận email thực tế. | 16/06/2026 | 16/06/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 9:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 9:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Hệ thống xử lý bất đồng bộ hoạt động tự động và ổn định, tự động gửi lại tin nhắn khi gặp sự cố tạm thời.
+* Biên dịch thành công các email định dạng HTML động qua Thymeleaf và gửi thư điện tử nhanh chóng.
+* Các thông báo hệ thống được ghi nhận đầy đủ, sẵn sàng cho việc đẩy real-time bằng WebSockets.

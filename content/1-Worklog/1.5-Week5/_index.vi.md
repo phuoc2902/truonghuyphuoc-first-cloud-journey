@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 5"
+﻿---
+title: "Tuần 5 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 5:
 
+* Phát triển hệ thống REST API giỏ hàng ở Backend bằng Spring Boot và thiết kế cơ sở dữ liệu.
 
-### Mục tiêu tuần 5:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | Thiết kế lược đồ quan hệ thực thể cho các bảng Cart và CartItem liên kết người dùng với sản phẩm. | 13/05/2026 | 13/05/2026 |  |
+| 3 | Khai báo các lớp thực thể JPA Entities và giao diện Spring Data Repository để thao tác dữ liệu. | 14/05/2026 | 14/05/2026 | <https://spring.io/projects/spring-data-jpa> |
+| 4 | Viết Service Layer hiện thực hóa nghiệp vụ giỏ hàng và lưu vết thông tin xuống database. | 15/05/2026 | 15/05/2026 |  |
+| 5 | Cung cấp các API endpoint thông qua CartController bảo mật bằng cơ chế JWT của Spring Security. | 18/05/2026 | 18/05/2026 | <https://spring.io/projects/spring-security> |
+| 6 | Viết mã kiểm thử tự động kiểm tra tham số đầu vào và định tuyến API bằng MockMvc. | 19/05/2026 | 19/05/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 5:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 5:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Thiết kế cơ sở dữ liệu quan hệ hoàn tất và đã được nghiệm thu cấu trúc thực thể.
+* Xây dựng thành công hệ thống REST API bảo mật cho phép quản lý giỏ hàng đồng bộ trên máy chủ.
+* Lớp nghiệp vụ (Service) xử lý chính xác việc thêm sản phẩm, tính toán giá trị và kiểm tra số lượng tồn kho.

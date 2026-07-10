@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 8"
+﻿---
+title: "Tuần 8 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 8:
 
+* Xây dựng mô hình Publisher gửi sự kiện (Email, Notification) bất đồng bộ sang Message Queue.
 
-### Mục tiêu tuần 8:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | Thiết kế các thực thể Event DTO chứa thông tin sự kiện như đặt hàng thành công và tạo tài khoản. | 03/06/2026 | 03/06/2026 |  |
+| 3 | Viết service lớp gửi tin `EmailEventPublisher` sử dụng `RabbitTemplate` để đẩy tin nhắn định dạng JSON. | 04/06/2026 | 04/06/2026 | <https://spring.io/projects/spring-amqp> |
+| 4 | Tạo service `NotificationEventPublisher` chuyên gửi các sự kiện tạo thông báo nội bộ hệ thống. | 05/06/2026 | 05/06/2026 |  |
+| 5 | Tái cấu trúc các API chính (như API thanh toán) để kích hoạt Publisher thay vì xử lý tuần tự trực tiếp. | 08/06/2026 | 08/06/2026 |  |
+| 6 | Kiểm thử tải để đảm bảo việc xuất bản tin nhắn chạy ngầm không cản trở tốc độ phản hồi của API. | 09/06/2026 | 09/06/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 8:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 8:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Tách biệt hoàn toàn API giao dịch chính khỏi các tác vụ ngoại vi tốn thời gian (kết nối máy chủ SMTP).
+* Đảm bảo tính toàn vẹn dữ liệu: tin nhắn chỉ được gửi đi khi các thao tác database trước đó lưu thành công.
+* Giảm thiểu thời gian chờ đợi phản hồi của khách hàng khi thanh toán từ đơn vị giây xuống mili-giây.

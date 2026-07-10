@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 3"
+﻿---
+title: "Tuần 3 Worklog"
 date: 2024-01-01
-weight: 1
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 3:
 
+* Hiện thực hóa quản lý trạng thái đăng nhập toàn cục và thiết kế khung giao diện (Layout Skeletons).
 
-### Mục tiêu tuần 3:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | Đánh giá các thư viện quản lý state và quyết định sử dụng Zustand vì tính gọn nhẹ và hiệu năng cao. | 29/04/2026 | 29/04/2026 | <https://github.com/pmndrs/zustand> |
+| 3 | Xây dựng auth store quản lý thông tin profile, lưu trữ tokens và các action đăng nhập/đăng xuất. | 30/04/2026 | 30/04/2026 | <https://github.com/pmndrs/zustand> |
+| 4 | Thiết kế các layout cơ sở của trang web bao gồm Header, Sidebar phản hồi thiết bị di động và Footer. | 01/05/2026 | 01/05/2026 |  |
+| 5 | Liên kết Axios client interceptors với Zustand store để đồng bộ hóa trạng thái phiên làm việc. | 04/05/2026 | 04/05/2026 |  |
+| 6 | Thiết kế các loading layout skeleton giúp chuyển đổi giao diện mượt mà khi hệ thống đang tải dữ liệu. | 05/05/2026 | 05/05/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 3:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 3:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Tích hợp thành công Zustand state store giúp quản lý đồng bộ phiên đăng nhập của người dùng.
+* Hoàn thiện các component loading skeleton tránh xê dịch giao diện và tăng tốc độ cảm nhận của người dùng.
+* Kết nối đồng bộ trạng thái đăng nhập frontend với cookie bảo mật của trình duyệt.

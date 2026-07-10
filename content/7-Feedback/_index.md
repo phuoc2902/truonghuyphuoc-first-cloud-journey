@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 7. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
 > Here, you can freely share your personal opinions about your experience participating in the First Cloud AI Journey program. This will help the FCAJ team improve any shortcomings based on the following aspects:
 
 ### Overall Evaluation
@@ -35,13 +31,19 @@ The company provides an internship allowance and offers flexible working hours w
 ---
 
 ### Additional Questions
-- What did you find **most satisfying** during your internship?  
-- What do you think the company **should improve** for future interns?  
-- If recommending to a friend, would you **suggest they intern here**? Why or why not?  
+- **What did you find most satisfying during your internship?**  
+  I was most satisfied with the hands-on experience of deploying applications to AWS and integrating an AI Chatbot using Amazon Bedrock. Additionally, the supportive culture of the FCAJ community and the guidance of the mentors were outstanding.
+- **What do you think the company should improve for future interns?**  
+  It would be great to have more structured bootcamps or short training sessions at the beginning of the internship to help interns align with the technology stack (like Spring Boot or Next.js App Router) faster.
+- **If recommending to a friend, would you suggest they intern here? Why or why not?**  
+  Yes, absolutely! The learning curve is steep but very rewarding. You get to work with actual cloud infrastructures and modern architectures instead of just writing basic scripts.
 
 ---
 
 ### Suggestions & Expectations
-- Do you have any suggestions to improve the internship experience?  
-- Would you like to continue this program in the future?  
-- Any other comments (free sharing):
+- **Do you have any suggestions to improve the internship experience?**  
+  Organizing more regular technical sharing sessions or code review meetups among interns would help us learn from each other's mistakes.
+- **Would you like to continue this program in the future?**  
+  Yes, I would love to continue participating in the FCAJ community as an active member or mentor helper to guide new newcomers.
+- **Any other comments (free sharing):**  
+  Special thanks to all the mentors, admin team, and fellow interns for making this a memorable and highly impactful journey!

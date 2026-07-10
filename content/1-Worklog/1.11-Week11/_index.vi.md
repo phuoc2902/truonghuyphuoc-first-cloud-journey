@@ -1,59 +1,25 @@
----
-title: "Worklog Tuần 11"
+﻿---
+title: "Tuần 11 Worklog"
 date: 2024-01-01
-weight: 2
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+### Mục tiêu Tuần 11:
 
+* Thiết kế và cấu hình quy trình tích hợp liên tục tự động (CI/CD Pipeline) bằng GitLab CI.
 
-### Mục tiêu tuần 11:
+### Các công việc thực hiện trong tuần:
+| Ngày | Công việc thực hiện | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
+| --- | --- | --- | --- | --- |
+| 2 | Phân tích các cơ chế hoạt động của GitLab Runner và cấu hình runner chạy trên môi trường Docker. | 24/06/2026 | 24/06/2026 |  |
+| 3 | Tạo file cấu hình `.gitlab-ci.yml` tại thư mục gốc của mã nguồn backend. | 25/06/2026 | 25/06/2026 | <https://docs.gitlab.com/ee/ci/> |
+| 4 | Thiết lập stage build chạy Maven biên dịch mã nguồn và đóng gói thành file JAR. | 26/06/2026 | 26/06/2026 | <https://docs.gitlab.com/ee/ci/> |
+| 5 | Thiết lập stage test tự động kích hoạt chạy toàn bộ unit tests mỗi khi có commit mới. | 29/06/2026 | 29/06/2026 |  |
+| 6 | Tối ưu hóa bộ nhớ đệm (caching) và giải quyết các lỗi dependency của runner để tăng tốc độ chạy pipeline. | 30/06/2026 | 30/06/2026 |  |
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Kết quả đạt được trong Tuần 11:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 11:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Tự động hóa hoàn toàn quy trình biên dịch mã nguồn backend đảm bảo code luôn trong trạng thái build được.
+* Tự động kích hoạt chạy kiểm thử, ngăn chặn việc gộp (merge) code lỗi lên các nhánh chính.
+* Cấu hình cache thư viện Maven giúp rút ngắn 50% thời gian thực thi của mỗi luồng pipeline.

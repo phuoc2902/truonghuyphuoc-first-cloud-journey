@@ -1,126 +1,37 @@
 ---
 title: "Event 2"
 date: 2024-01-01
-weight: 1
+weight: 2
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+# Summary Report: "AWS: Enterprise Cloud Architectures and Industry Application"
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+### General Event Information
+- **Event Name:** AWS: Enterprise Cloud Architectures and Industry Application featuring Cloud Kinetics & Renova Cloud
+- **Date & Time:** July 4, 2026
+- **Context:** Collaboration event between AWS, Swinburne Vietnam, and the First Cloud AI Journey (FCAJ) community.
+- **Role:** Attendee
 
-### Event Objectives
+### Presentations & Main Highlights
+1. **Job Market Perspectives & Cloud Trends**
+   - **Details:** Mr. Nguyễn Gia Hưng (Head of SA at AWS Vietnam) analyzed the fierce competition in today's tech market. Companies no longer prioritize hand-holding mentorship but expect candidates to possess a strong problem-solving mindset and practical skills right from day one.
+2. **Data Engineering & Real-World Applications**
+   - **Details:** Mr. Bành Cẩm Vĩnh (Data Engineer at Renova Cloud) shared insights on "One framework for every platform," emphasizing that mastering fundamentals is far more important than chasing tools. He demonstrated how to transform raw data into business value rather than just executing pure technical tasks.
+3. **Skills, Mindset, and AI**
+   - **Details:** Ms. Nhu and Mr. Khang Nguyễn discussed the importance of lifelong learning, resilience, and the mindset required to work in large enterprise environments. AI is seen as a powerful supporting tool to optimize performance if professionals know how to prompt correctly to solve specific business problems.
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### Key Takeaways & Action Plan
+#### New Knowledge & Mindsets
+- **Industry-Based Mindset:** Do not just focus on the technical role; one must understand the specific business context of the industry (banking, retail, manufacturing).
+- **Leverage AI:** Use AI to review code quality, optimize architecture, and self-train instead of just using it to write raw code.
+- **Value-Driven:** All personal side projects should solve a real pain point for customers or businesses rather than just being technical exercises.
 
-### Speakers
+#### Action Plan
+- **Build a Professional Profile:** Share projects publicly on GitHub/personal blogs and update international certificates regularly so recruitment AI systems can scan and evaluate potential.
+- **Practice Communication:** Treat communication as a mandatory technical skill to effectively convey the value of the system to business stakeholders.
+- **Focus on Fundamentals:** Study core school subjects thoroughly, as they are the unchanging foundation regardless of how cloud providers and technologies evolve.
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
-
-### Key Highlights
-
-#### Identifying the drawbacks of legacy application architecture
-
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
-
-#### Transitioning to modern application architecture – Microservices
-
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
-
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
-
-#### Domain-Driven Design (DDD)
-
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
-
-#### Event-Driven Architecture
-
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
-
-#### Amazon Q Developer
-
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
-
-### Key Takeaways
-
-#### Design Mindset
-
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
-
-#### Technical Architecture
-
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
-
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+### Some event photos
+*Add your event photos here*
