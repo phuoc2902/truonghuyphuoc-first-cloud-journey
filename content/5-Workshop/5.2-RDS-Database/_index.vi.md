@@ -37,7 +37,7 @@ Nhằm đảm bảo an toàn, chúng ta chỉ cho phép máy chủ ứng dụng 
 1. Đi tới phần cấu hình **Security Groups** của cơ sở dữ liệu vừa tạo.
 2. Chọn **Inbound rules** (Quy tắc đầu vào) và thêm một quy tắc mới:
    - **Type**: `PostgreSQL` (Port 5432)
-   - **Source**: Chọn địa chỉ IP tĩnh hoặc Custom Security Group của App Server (DigitalOcean Server IP). 
+   - **Source**: Chọn địa chỉ IP Private của App Server đi qua đường truyền **AWS Site-to-Site VPN** (hoặc chọn IP tĩnh công cộng của máy chủ DigitalOcean nếu kết nối trực tiếp ngoài môi trường mạng nội bộ).
 
 ![Cấu hình Security Group cho RDS](/images/5-Workshop/rds_security_groups.png)
 ![Chi tiết Rule Security Group](/images/5-Workshop/novatech_db_security_group.png)

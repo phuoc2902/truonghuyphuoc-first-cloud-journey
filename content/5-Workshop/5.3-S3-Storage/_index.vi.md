@@ -1,5 +1,5 @@
 ---
-title: "5.3. Dịch vụ Lưu trữ hình ảnh Amazon S3"
+title: "5.3. Dịch vụ Lưu trữ hình ảnh Amazon S3 & CloudFront"
 date: 2026-07-06
 weight: 3
 ---
@@ -8,28 +8,63 @@ weight: 3
 
 **Bài toán:** Một trang thương mại điện tử như NovaTech yêu cầu hiển thị hàng ngàn hình ảnh sản phẩm độ phân giải cao. Nếu lưu trữ toàn bộ các tệp tĩnh (static assets) này trực tiếp trên ổ cứng của máy chủ ứng dụng (DigitalOcean Droplet), băng thông (bandwidth) tải trang sẽ bị nghẽn, làm chậm thời gian tải web (Page Load Time), ảnh hưởng lớn đến trải nghiệm người dùng (UX) và SEO. Hơn nữa, ổ cứng VPS thường có giới hạn dung lượng và đắt đỏ khi mở rộng.
 
-**Giải pháp:** Tách rời việc lưu trữ tệp tĩnh ra khỏi máy chủ ứng dụng bằng cách sử dụng **Amazon S3 (Simple Storage Service)**. 
+**Giải pháp:** Tách rời việc lưu trữ tệp tĩnh ra khỏi máy chủ ứng dụng bằng cách sử dụng **Amazon S3 (Simple Storage Service)** kết hợp mạng lưới phân phối nội dung toàn cầu **Amazon CloudFront (CDN)**. 
 - S3 cung cấp khả năng lưu trữ không giới hạn (Object Storage) với chi phí cực kỳ rẻ.
-- Việc tải ảnh từ Frontend sẽ được trỏ thẳng tới URL của S3, giúp máy chủ DigitalOcean hoàn toàn rảnh tay để tập trung xử lý logic nghiệp vụ và tính toán.
+- CloudFront giúp lưu trữ bộ nhớ đệm (caching) hình ảnh tại các Edge Location gần người dùng nhất để tăng tốc độ tải, đồng thời sử dụng **Origin Access Control (OAC)** để giữ cho S3 Bucket luôn ở chế độ riêng tư (Private), chỉ cho phép truy cập hình ảnh thông qua CloudFront CDN.
 
-Dưới đây là phần **Minh chứng triển khai** cấu hình Amazon S3 và mã nguồn kết nối:
+Dưới đây là phần **Minh chứng triển khai** cấu hình hạ tầng lưu trữ và phân phối hình ảnh:
 
-#### 2. Khởi tạo Buckets trên Amazon S3 Console
+---
+
+#### 2. Khởi tạo Mạng riêng ảo (VPC) và S3 Gateway Endpoint
+
+Để đảm bảo các tài nguyên chạy trong mạng nội bộ AWS (ví dụ: các ứng dụng hoặc cơ sở dữ liệu nội bộ) có thể giao tiếp bảo mật với Amazon S3 mà không cần đi qua môi trường Internet công cộng, chúng ta thiết lập một S3 Gateway Endpoint ngay khi tạo VPC:
+1. Sử dụng trình hướng dẫn khởi tạo VPC trên AWS Console để tạo VPC tự động.
+2. Trình khởi tạo sẽ thiết lập các Subnet, Internet Gateway, Bảng định tuyến (Route tables) và tự động tạo/liên kết một **S3 Gateway Endpoint** cho bảng định tuyến nội bộ:
+
+![Khởi tạo VPC và S3 Endpoint](/images/5-Workshop/vpc_creation_wizard.png)
+
+---
+
+#### 3. Khởi tạo Buckets trên Amazon S3 Console
+
 1. Trên AWS Console, tìm kiếm dịch vụ **S3** và nhấn **Create bucket**.
 2. Thiết lập Bucket lưu trữ ảnh sản phẩm:
    - **Bucket name**: `novatech-product-images` (Tên bucket phải là duy nhất trên toàn cầu).
    - **AWS Region**: Chọn khu vực gần bạn (ví dụ: `ap-southeast-1` Singapore).
-3. Tại mục **Object Ownership**: Chọn **ACLs enabled** (Hoặc quản lý bằng Bucket Policy để cho phép đọc công khai tệp ảnh).
-4. Tại mục **Block Public Access settings for this bucket**:
-   - Nếu bạn muốn hình ảnh hiển thị trực tiếp lên trình duyệt của khách hàng, bỏ tích chọn **Block all public access** (Bỏ chặn truy cập công khai).
-   - *Lưu ý*: Hãy đọc kỹ và tick xác nhận cảnh báo của AWS về việc mở công khai bucket.
-5. Nhấn **Create bucket**.
+3. Tại mục **Block Public Access settings for this bucket**: Giữ nguyên trạng thái **Block all public access** (Bảo mật tuyệt đối, chỉ cho phép CloudFront truy cập).
+4. Nhấn **Create bucket**.
 
 ![Danh sách S3 Buckets](/images/5-Workshop/s3_buckets_list.png)
 
 ---
 
-#### 3. Cài đặt thư viện AWS SDK S3 trong Backend (Spring Boot)
+#### 4. Cấu hình phân phối hình ảnh qua Amazon CloudFront CDN & OAC
+
+Để đảm bảo S3 Bucket không công khai nhưng người dùng vẫn có thể xem được hình ảnh sản phẩm tốc độ cao, chúng ta tạo một CloudFront Distribution và cấu hình cơ chế bảo mật OAC:
+
+1. **Thiết lập OAC trên CloudFront:**
+   - Tại màn hình cấu hình Origin của CloudFront Distribution, chọn S3 Bucket làm Origin domain.
+   - Tại phần **Origin access**: Chọn **Origin access control settings (recommended)**.
+   - Nhấn **Create new OAC** để tạo một cấu hình OAC mới.
+
+   ![Cấu hình CloudFront OAC](/images/5-Workshop/cloudfront_oac_config.png)
+
+2. **Cập nhật Bucket Policy cho S3:**
+   - Sau khi tạo Distribution, nhấn **Copy policy** ở thanh thông báo hướng dẫn để sao chép mã chính sách (JSON Policy).
+   - Đi tới S3 Bucket -> tab **Permissions** -> mục **Bucket Policy** và chọn **Edit**, sau đó dán đoạn JSON đã sao chép để cấp quyền đọc (`s3:GetObject`) cho CloudFront Service Principal:
+
+   ![S3 Bucket Policy cho CloudFront](/images/5-Workshop/cloudfront_s3_policy.png)
+
+3. **Xác nhận cấu hình Distribution thành công:**
+   - Đợi quá trình deploy hoàn thành (Trạng thái chuyển sang Available). Bạn sẽ sử dụng **Distribution domain name** này để truy cập tài nguyên:
+
+   ![Cấu hình Distribution thành công](/images/5-Workshop/cloudfront_distribution_success.png)
+
+---
+
+#### 5. Cài đặt thư viện AWS SDK S3 trong Backend (Spring Boot)
+
 Thêm dependency của AWS SDK S3 vào file `pom.xml` của dự án Backend:
 
 ```xml
@@ -42,7 +77,8 @@ Thêm dependency của AWS SDK S3 vào file `pom.xml` của dự án Backend:
 
 ---
 
-#### 4. Mã nguồn tích hợp tải ảnh lên S3
+#### 6. Mã nguồn tích hợp tải ảnh lên S3
+
 Dưới đây là mã nguồn thực tế lớp [CloudStorageServiceImpl.java](file:///Users/tranthikieuoanh/Documents/FCJ-Workshop/nova-tech/nova-tech-be/src/main/java/com/novatech/nova_tech_be/shared/services/impl/CloudStorageServiceImpl.java) xử lý nghiệp vụ upload/delete ảnh sản phẩm từ Client thông qua API:
 
 ```java
@@ -92,8 +128,8 @@ public class CloudStorageServiceImpl implements ICloudStorageService {
             // Thực hiện tải file lên Amazon S3 qua AWS SDK
             s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
 
-            // Tạo đường dẫn URL công khai để truy cập ảnh
-            String url = String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, objectKey);
+            // Tạo đường dẫn URL thông qua CloudFront CDN thay vì link S3 trực tiếp
+            String url = String.format("https://d1amspckjkbrez.cloudfront.net/%s", objectKey);
 
             Map<String, Object> result = new HashMap<>();
             result.put("url", url);
@@ -124,7 +160,8 @@ public class CloudStorageServiceImpl implements ICloudStorageService {
 
 ---
 
-#### 5. Cấu hình biến môi trường kết nối
+#### 7. Cấu hình biến môi trường kết nối
+
 Cấu hình các tham số truy cập AWS trong file cấu hình máy chủ App Server:
 - `S3_BUCKET_NAME`: `novatech-product-images`
 - `AWS_REGION`: `ap-southeast-1`

@@ -1,28 +1,34 @@
-﻿---
-title: "Workshop"
-date: 2024-01-01
+---
+title: "5. Hướng dẫn Triển khai NovaTech E-Commerce MVP & AI Chatbot trên AWS"
+linkTitle: "Workshop"
+date: 2026-07-06
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+#### Tổng quan (Overview)
 
-#### Tổng quan
+Phần này đóng vai trò như một **Báo cáo Trình bày Dự án (Project Presentation)**, hướng dẫn và phân tích chi tiết cách thiết lập, triển khai hạ tầng đám mây cho dự án **NovaTech E-Commerce**. Điểm nhấn cốt lõi của dự án là việc tích hợp **Trợ lý ảo AI Chatbot** dựa trên kiến trúc Hybrid Cloud (kết hợp sức mạnh của AWS và máy chủ ứng dụng DigitalOcean). 
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+Thay vì chỉ đưa ra các bước "nhấp chuột" đơn thuần, tài liệu này sẽ đi sâu vào việc giải thích **Lý do (Why)** và **Bài toán nghiệp vụ (Business Case)** đằng sau mỗi quyết định lựa chọn công nghệ, đồng thời cung cấp mã nguồn thực tế như một **Minh chứng triển khai (Implementation Proof)**.
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
+#### Đối tượng hướng tới
+- Các cá nhân muốn dùng dự án này làm đồ án tốt nghiệp, báo cáo bảo vệ trước hội đồng hoặc portfolio xin việc.
+- Kỹ sư phần mềm muốn hiểu rõ tư duy thiết kế hệ thống (System Design) và cách giải quyết bài toán nghiệp vụ thực tế.
 
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
+#### Yêu cầu chuẩn bị (Prerequisites)
+- **Tài khoản AWS:** Đang trong trạng thái hoạt động (khuyến nghị sử dụng tài khoản Free Tier để tránh phát sinh chi phí).
+- **Kiến thức cơ bản:** Hiểu biết cơ bản về Linux (Ubuntu), cách kết nối SSH, nền tảng Java (Spring Boot) và React (Next.js).
+- **Công cụ:** Đã cài đặt sẵn một phần mềm quản trị cơ sở dữ liệu (DBeaver, pgAdmin, DataGrip, v.v.).
 
-#### Nội dung
+#### Các bước thực hiện và Phân tích hệ thống
 
-1. [Tổng quan về workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+1. [Sơ đồ kiến trúc & Bài toán nghiệp vụ](5.1-Architecture-Overview/)
+2. [Cơ sở dữ liệu Amazon RDS PostgreSQL (Bảo toàn Dữ liệu)](5.2-RDS-Database/)
+3. [Dịch vụ Lưu trữ hình ảnh Amazon S3 (Tối ưu Hiệu suất Web)](5.3-S3-Storage/)
+4. [Xác thực người dùng với Amazon Cognito (Bảo mật Danh tính)](5.4-Cognito-Auth/)
+5. [Tích hợp Trợ lý ảo AI Chatbot Amazon Bedrock (Điểm nhấn Dự án)](5.5-Bedrock-AI/)
+6. [Cấu hình máy chủ DigitalOcean & Cổng thanh toán PayOS (Hoàn tất Chu trình)](5.6-Non-AWS-Services/)
+7. [Demo Giao diện Ứng dụng Thực tế (Minh chứng Giao diện)](5.7-UI-Demo/)
+8. [Dọn dẹp tài nguyên (Tối ưu Chi phí)](5.8-Cleanup/)

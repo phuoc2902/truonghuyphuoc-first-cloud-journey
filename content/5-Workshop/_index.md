@@ -30,4 +30,5 @@ Rather than providing simple "click-by-click" instructions, this documentation d
 4. [Amazon Cognito Authentication (Identity Security)](5.4-Cognito-Auth/)
 5. [Amazon Bedrock AI Chatbot (Project Highlight)](5.5-Bedrock-AI/)
 6. [DigitalOcean & PayOS (Completing the Flow)](5.6-Non-AWS-Services/)
-7. [Resource Cleanup (Cost Optimization)](5.7-Cleanup/)
+7. [Real-world Application Demo (UI Proof)](5.7-UI-Demo/)
+8. [Resource Cleanup (Cost Optimization)](5.8-Cleanup/)

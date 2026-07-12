@@ -1,47 +1,52 @@
 ---
-title: "5.1. Architecture & Overview"
+title: "5.1. Architecture Diagram & Overview"
 date: 2026-07-06
 weight: 1
 ---
 
 #### 1. Business Context
 
-**NovaTech** is a specialized e-commerce platform selling tech products (Laptops, Accessories). The biggest pain point for customers when buying laptops online is that they **don't understand complex technical specifications** (like U vs H series CPUs, RAM bus speeds, etc.), which leads to hesitation and high bounce rates.
+**NovaTech** is a specialized e-commerce platform selling technology products (laptops, accessories). The biggest pain point for customers shopping for laptops online is that **they do not understand complex technical specifications** (such as U vs H series CPUs, RAM bus speeds, etc.), leading to hesitation and high cart abandonment rates.
 
-**The Solution:** Integrate an AI Chatbot Assistant directly into the storefront. Instead of Googling for answers, customers simply ask *"Recommend a laptop for programming under $1000"*, and the AI analyzes their needs to suggest the exact products available in the store's inventory.
+**The Solution:** Integrate an AI Chatbot virtual assistant directly into the store interface. Instead of googling specifications, customers can simply ask: *"Recommend a programming laptop under $1000"*, and the AI will analyze their needs and suggest matching products available in the store inventory.
+
+---
 
 #### 2. Hybrid Cloud Architecture
 
-Below is the actual system architecture of the project, designed using a Hybrid Cloud model:
+Below is the actual system architecture diagram of the project, designed using a Hybrid Cloud model combining AWS Cloud services with a DigitalOcean virtual private server:
 
-![NovaTech Hybrid Cloud Architecture](/images/2-Proposal/novatech_aws_do_mvp_with_ai_chatbot.drawio.png)
+![NovaTech Hybrid Cloud Architecture](/images/2-Proposal/novatech_aws_do_mvp_with_ai_chatbot.svg)
 
-#### 3. Why Hybrid Cloud?
+---
 
-Instead of deploying 100% of the application on AWS (using EC2/ECS/EKS) which requires complex operational skills and high monthly maintenance costs for an MVP/startup project, NovaTech adopts a Decoupling strategy:
-- **Core Application (Always-on logic):** Hosted on **DigitalOcean** virtual servers (Droplets) with a fixed, affordable cost that's easy to scale when needed.
-- **Data & AI (High Availability, Security):** Core services that cannot compromise on security and stability, such as the Database (RDS), Image Storage (S3), User Identity (Cognito), and Artificial Intelligence (Bedrock), are entirely entrusted to **AWS Cloud**.
+#### 3. Core Components:
 
-#### 4. Data Flow Analysis
+##### A. Edge Front Door (Outside VPC)
+- **Amazon Route 53**: Handles DNS resolution.
+- **AWS WAF (Web Application Firewall)**: Filters malicious payloads and protects the API against OWASP Top 10 exploits.
+- **Amazon CloudFront**: CDN for delivering the static web interface (Next.js SPA) and routing API requests.
+- **Amazon S3 (Private SPA origin)**: Securely hosts the compiled frontend code.
+- **AWS Certificate Manager (ACM)**: Manages and issues SSL/TLS certificates automatically.
 
-The system operates through a tight integration of these services:
+##### B. Web Application Server (DigitalOcean VPS)
+- **Nginx Reverse Proxy**: Receives traffic from CloudFront and routes it to the backend application.
+- **Spring Boot API (Java)**: Handles main business logic and validates Cognito JWT tokens.
+- **Redis App Cache**: Caches product catalogs to reduce query latency and DB load.
 
-1. **Client (Browser/Frontend)**:
-   - Users access the application through a web interface built with **Next.js**. This frontend can be deployed on platforms like Vercel or AWS Amplify.
-   - For user registration and login, the browser communicates directly with **Amazon Cognito** to obtain a JSON Web Token (JWT) for secure authentication.
+##### C. Private Database Network (AWS Cloud VPC)
+- **AWS Site-to-Site VPN**: Establishes an encrypted IPSec VPN tunnel between the Customer Gateway (DigitalOcean) and the Virtual Private Gateway (AWS).
+- **Amazon RDS PostgreSQL (Multi-AZ)**: Hosted entirely inside a Private Subnet. The Primary instance in AZ A processes read/write operations, while the Standby instance in AZ B synchronizes data to guarantee automatic failover (High Availability).
 
-2. **Application Server (Backend - DigitalOcean)**:
-   - Runs a **Spring Boot API** that handles the core business logic of the website (managing products, cart functionality, and processing payments via the PayOS API).
-   - The Backend API uses environment variables containing AWS Access Keys to securely call AWS services.
+##### D. AI Chatbot & Auxiliary Services (Regional AWS Services)
+- **Amazon Cognito**: Handles user registration, sign-ins, and federated Google login.
+- **Amazon Bedrock**: Runs Large Language Models (LLM) to process customer conversations.
+- **Amazon S3 (RAG Context)**: Stores product specifications and FAQ guides to provide accurate context for Bedrock AI.
+- **AWS Secrets Manager**: Secures database credentials and payment gateway API keys.
 
-3. **Cloud Database (Amazon RDS PostgreSQL)**:
-   - Deployed within a secure AWS VPC.
-   - To secure data, the database is configured to only accept incoming connections originating from the static Elastic IP of the **DigitalOcean App Server** via **Security Group** ingress rules.
-
-4. **Object Storage (Amazon S3)**:
-   - Consists of two main S3 buckets:
-     - `novatech-product-images`: Used to store and serve laptop product images.
-     - `novatech-chatbot-rag`: Stores knowledge base documents (e.g., `.pdf`, `.txt` files) for RAG training.
-
-5. **Generative AI Chatbot (Amazon Bedrock)**:
-   - The Spring Boot backend interacts with Amazon Bedrock using the **Claude 3 Haiku/Sonnet** model to generate responses to customer queries regarding laptop specifications, utilizing the RAG knowledge documents stored in S3.
+##### E. Security, Observability & External Services
+- **Amazon CloudWatch**: Collects system logs and resource metrics.
+- **AWS CloudTrail**: Records AWS API calls for security auditing.
+- **Amazon SES (Simple Email Service)**: Sends account verification and order receipt emails.
+- **CI/CD Pipeline**: Automates build, test, and deployment steps from GitHub/GitLab to the DO VPS via SSH.
+- **PayOS Payment Gateway**: Integrates a Vietnamese payment gateway for processing order transactions.

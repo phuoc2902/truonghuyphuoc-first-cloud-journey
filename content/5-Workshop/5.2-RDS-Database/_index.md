@@ -37,7 +37,7 @@ To ensure safety, we only allow the Spring Boot application server to connect to
 1. Go to the **Security Groups** configuration for the newly created database.
 2. Select **Inbound rules** and add a new rule:
    - **Type**: `PostgreSQL` (Port 5432)
-   - **Source**: Select the static IP address or Custom Security Group of the App Server (DigitalOcean Server IP). 
+   - **Source**: Select the Private IP address of the App Server routing through the **AWS Site-to-Site VPN** (or choose the public static IP of the DigitalOcean server if connecting directly outside the private network).
 
 ![RDS Security Group Configuration](/images/5-Workshop/rds_security_groups.png)
 ![Security Group Rule Details](/images/5-Workshop/novatech_db_security_group.png)
