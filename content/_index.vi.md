@@ -13,7 +13,7 @@ chapter: false
 
 &emsp; **Email:** truonghuyphuoc789@gmail.com
 
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+&emsp; **Trường:** Trường Đại Học Công Nghệ TP.HCM Hutech
 
 &emsp; **Ngành:** Công nghệ thông tin
 
